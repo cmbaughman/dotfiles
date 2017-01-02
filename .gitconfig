@@ -1,10 +1,19 @@
 [user]
   name = Chris Baughman
   email = cmbaughman@outlook.com
+[github]
+  user = cmbaughman
+[credential]
+  helper = osxkeychain
+[hub]
+  protocol = https
 [core]
   editor = nano
   excludesfile = ~/.gitignore
+  pager = less -FRSX
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
   autocrlf = input
+  safecrlf = true
 [color]
   branch = auto
   diff = auto
@@ -12,15 +21,29 @@
   status = auto
 [web]
   browser = google-chrome
-[credential]
-  helper = osxkeychain
 [push]
   default = simple
-[merge]
-  tool = kdiff3
-[difftool]
-  prompt = false
 [alias]
-  d = diff
-  dc = diff --cached
-  l = log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit
+  a       = add -u
+  aa      = add --all :/
+  ap      = add -u -p
+  b       = browse
+  bam     = "!source ~/.githelpers && delete_local_merged_branches"
+  bamr    = "!source ~/.githelpers && delete_remote_merged_branches"
+  c       = commit -v
+  co      = checkout
+  d       = diff
+  ds      = diff --staged
+  dw      = diff --color-words
+  po      = push origin head
+  pr      = "!f() { git fetch origin refs/pull/$1/head:pr/$1 && git co pr/$1; } ; f"
+  s       = status -s -b
+  sm      = submodule
+  smu     = submodule foreach git pull origin master
+  summary = "!source ~/.githelpers && weekly_summary"
+  td      = merge --no-ff
+  up      = "!git fetch upstream && git rebase upstream/master"
+  w       = whatchanged --decorate
+  wp      = whatchanged --decorate -p
+  wtf     = "!git fetch --multiple production origin && git log production/master..origin/master"
+  l = log --pretty='format:%C(yellow)%h %C(blue)%ad %C(reset)%s%C(red)%d %C(green)%an%C(reset), %C(cyan)%ar' --date=short
