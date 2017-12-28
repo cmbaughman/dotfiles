@@ -6,7 +6,7 @@ rvm: system
 cache: bundler
 
 script:
-  - init.sh
+  - bash init.sh
 
 notifications:
   email:
